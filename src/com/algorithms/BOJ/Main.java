@@ -2,7 +2,7 @@ package com.algorithms.BOJ;
 
 import java.util.Scanner;
 
-public class Solution_3062 {
+public class Main {
 
 	// 입력된 숫자의 자리수 구하기.
 	static int numberSize(int n) {
@@ -152,7 +152,7 @@ public class Solution_3062 {
 
 		for (int i = 0; i < testCase; i++)
 			System.out.println(result[i]);
-
+		
 		sc.close();
 
 	}
