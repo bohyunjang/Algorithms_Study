@@ -41,11 +41,6 @@ public class Main_2839 {
 		int bongdari5 = N / 5;
 		int namoji5 = N % 5;
 
-		// 3, 5, 15 배수 외에는 -1 출력.
-		if (namoji3 != 0 && namoji5 != 0 && (namoji5) % 3 != 0) {
-			return -1;
-		}
-
 		if (namoji3 == 0) {
 			// 3의 배수로 나눠보기. -> 배열에 저장
 			bongdari[0][1] = bongdari3;
@@ -84,6 +79,8 @@ public class Main_2839 {
 
 		// 저장된 배열중 가장 작은 값을 출력한다.
 		result = minArr(bongdari);
+		if (result == 999999)
+			result = -1;
 
 		return result;
 	}
