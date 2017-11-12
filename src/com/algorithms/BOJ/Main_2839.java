@@ -64,14 +64,18 @@ public class Main_2839 {
 				bongdari[2][1] = bongdari5;
 				bongdari[2][1] += namoji5 / 3;
 			} else {
-				// 5의 나머지가 3으로 나눠지지 않을경우 5의 지수를 하나씩 제하면서 3으로 나눠본다.
 				bongdari[2][1] = 999999;
+				// 5의 나머지가 3으로 나눠지지 않을경우 5의 지수를 하나씩 제하면서 3으로 나눠본다.
 				for (int i = 0; i < bongdari5; i++) {
-					int temp = N / (bongdari5 - i);
-					if (temp % 3 == 0 && temp < bongdari[2][1]) {
-						bongdari[2][1] = bongdari5 - i;
-						bongdari[2][1] += N % ( bongdari5 - i ) / 3;
+					int temp = bongdari5 - i;
+					int cal = (N - (temp * 5)) % 3;
+					int sum = temp + (N - (temp * 5)) / 3;
+					if (cal == 0 && sum < bongdari[2][1]) {
+
+						bongdari[2][1] = sum;
+
 					}
+
 				}
 
 			}
