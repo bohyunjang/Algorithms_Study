@@ -2,7 +2,7 @@ package com.algorithms.BOJ;
 
 import java.util.*;
 
-public class Main_7785 {
+public class Main_7785_o {
 
 	/*
 	 * 17.11.12 boj 7785) 상근이는 세계적인 소프트웨어 회사 기글에서 일한다. 이 회사의 가장 큰 특징은 자유로운 출퇴근 시간이다.

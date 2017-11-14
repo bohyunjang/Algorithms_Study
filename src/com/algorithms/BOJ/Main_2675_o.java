@@ -2,7 +2,7 @@ package com.algorithms.BOJ;
 
 import java.util.Scanner;
 
-public class Main_2675 {
+public class Main_2675_o {
 
 	/*
 	 * 2017.11.12 boj 2675 문자열반복 문자열 S를 입력받은 후에, 각 문자를 R번 반복해 새 문자열 T를 만든 후 출력하는
