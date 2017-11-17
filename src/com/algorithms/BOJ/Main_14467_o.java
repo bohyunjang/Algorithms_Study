@@ -1,10 +1,10 @@
 package com.algorithms.BOJ;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
-public class Main_14467 {
+public class Main_14467_o {
 
 	/*
 	 * 2017. 11. 07 BOJ 소가 건너는 이유. 존이 할 일은 소가 길을 건너는 것을 관찰하는 것이다. 존은 소의 위치를 N번
@@ -18,18 +18,24 @@ public class Main_14467 {
 		Scanner sc = new Scanner(System.in);
 
 		int testCase = sc.nextInt();
-		int[][] N = new int[testCase][2];
+		Map<Integer, Integer> cow = new HashMap<Integer, Integer>();
+		int num = 0;
+		int move = 0;
+		int count = 0;
 
 		for (int i = 0; i < testCase; i++) {
-			for (int j = 0; j < 2; j++) {
-				N[i][j] = sc.nextInt();
+			num = sc.nextInt();
+			move = sc.nextInt();
+
+			if (!cow.containsKey(num)) {
+				cow.put(num, move);
+			} else if (!cow.get(num).equals(move)) {
+				count++;
+				cow.put(num, move);
 			}
 		}
-
-	
-		Arrays.sort(N);
-		for(int i=0; i<testCase; i++) System.out.println(N[i]);
 		
+		System.out.println(count);
 		sc.close();
 
 	}
