@@ -22,7 +22,6 @@ public class Main_14468 {
 	 */
 
 	// 소가 풀을 먹는동안 지나가는 소들의 수 출력.
-	// 수정 -> 중간에 겹치는 글자들은 제거 
 	static List<String> meetingCow(String cows) {
 
 		ArrayList<String> cow = new ArrayList<>();
@@ -30,7 +29,20 @@ public class Main_14468 {
 		String cowcc = "";
 		cowcc += cows.charAt(0);
 		for (int i = 0; i < cows.length() - 2; i++) {
-			if (cows.charAt(i + 1) != cows.charAt(i + 2) && cows.charAt(0) <= cows.charAt(i + 1)) {
+			// 수정 -> 중간에 겹치는 글자들은 제거
+			boolean same = false;
+
+			char a = cows.charAt(i + 1);
+			for (int j = 0; j < cows.length() - 2; j++) {
+				char b = cows.charAt(j + 2);
+				if (a == b) {
+					same = true;
+					break;
+				}
+
+			}
+
+			if (!same && cows.charAt(0) <= cows.charAt(i + 1)) {
 				cowcc += cows.charAt(i + 1);
 				cow.add(cowcc);
 				cowcc = "";
