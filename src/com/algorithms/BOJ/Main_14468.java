@@ -59,9 +59,10 @@ public class Main_14468 {
 
 		int result = 0;
 		Map<String, List<String>> cowcow = new HashMap<String, List<String>>();
-		char cowNum = 'A';
+		int cnt = 0;
 
 		// 각 소별로 만나는 소를 찾기
+		char cowNum = cow.charAt(0);
 		while (true) {
 
 			String cows = "";
@@ -79,9 +80,13 @@ public class Main_14468 {
 			} // for
 			cows = cow.substring(startCow, endCow + 1);
 			cowcow.put(String.valueOf(cowNum), meetingCow(cows));
-			if (cowNum == 'Z')
+			if (cnt == 56) {
 				break;
-			cowNum++;
+			}else {
+				cowNum++;
+				cnt++;
+			}
+
 
 		} // while.
 
