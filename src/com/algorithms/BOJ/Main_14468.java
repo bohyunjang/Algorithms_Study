@@ -27,16 +27,25 @@ public class Main_14468 {
 		ArrayList<String> cow = new ArrayList<>();
 
 		String cowcc = "";
+		char[][] cowsArr = new char[cows.length()][2];
+		char[] tempCow = new char[cows.length()];
+		tempCow = cows.toCharArray();
+		for(int i=0; i<cows.length(); i++) {
+			cowsArr[i][0] = tempCow[i];
+		}
+		
 		cowcc += cows.charAt(0);
+		
 		for (int i = 0; i < cows.length() - 2; i++) {
 			// 수정 -> 중간에 겹치는 글자들은 제거
 			boolean same = false;
-
-			char a = cows.charAt(i + 1);
+			
+			char a = cowsArr[i+1][0]; 
 			for (int j = 0; j < cows.length() - 2; j++) {
-				char b = cows.charAt(j + 2);
+				char b = cowsArr[j+2][0]; 
 				if (a == b) {
 					same = true;
+					cowsArr[i+1][1] = 1;
 					break;
 				}
 
@@ -80,13 +89,12 @@ public class Main_14468 {
 			} // for
 			cows = cow.substring(startCow, endCow + 1);
 			cowcow.put(String.valueOf(cowNum), meetingCow(cows));
-			if (cnt == 56) {
+			if (cnt == cow.length() - 1) {
 				break;
-			}else {
-				cowNum++;
+			} else {
 				cnt++;
+				cowNum = cow.charAt(cnt);
 			}
-
 
 		} // while.
 
