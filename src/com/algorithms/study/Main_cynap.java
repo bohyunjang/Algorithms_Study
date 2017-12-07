@@ -70,30 +70,24 @@ public class Main_cynap {
 	}
 
 	// 세로줄(0의 개수만큼 아래로 떨어진다) 기준으로 0의 시작점, 갯수 구하기
+
+	// 없어 진 값 채우기 수정버전
 	static int[] gravity(int[] anyArr) {
 
-		int[] gArr = anyArr;
-		int[] result = new int[2];
-		int zStart = 0;
-		int zCount = 0;
+		int arrLength = anyArr.length;
+		int[] result = new int[arrLength];
+		int temp = arrLength - 1;
 
-		for (int i = 0; i < gArr.length; i++) {
+		for (int i = 0; i < result.length; i++)
+			result[i] = 0;
+		for (int i = anyArr.length - 1; i >= 0; i--) {
+			if (anyArr[i] == 0) {
+			} else {
+				result[temp] = anyArr[i];
+				temp--;
 
-			if (gArr[i] == 0 && zCount == 0) {
-				zStart = i;
-				zCount++;
-			} else if (gArr[i] == 0) {
-				zCount++;
 			}
-
-		} // 배열에 개수가 몇개인
-
-		if (zCount > 1) {
-			zStart = zStart + zCount - 1;
 		}
-
-		result[0] = zStart; // 시작점
-		result[1] = zCount; // 갯수
 
 		return result;
 
@@ -106,7 +100,6 @@ public class Main_cynap {
 		int[] temp = new int[5];
 		int[] rTemp = new int[2];
 
-		
 		int count = 0;
 		while (true) {
 
@@ -144,11 +137,12 @@ public class Main_cynap {
 
 			} // 세로
 
-			printArr(anyArr);
+			// printArr(anyArr);
+			// System.out.println("=============");
 
 			// 세로 기준으로 0값 채우기
 			int[] gArr = new int[5];
-			int[] gTemp = new int[2];
+			int[] gTemp = new int[5];
 			int zCount = 0;
 			for (int j = 0; j < anyArr.length; j++) {
 				for (int i = 0; i < anyArr.length; i++) {
@@ -156,28 +150,20 @@ public class Main_cynap {
 				}
 
 				gTemp = gravity(gArr);
-				zCount += gTemp[1];
-				 System.out.println("세로 0값 // 시작점 : " + gTemp[0] + " //// 0의 갯수 :" + gTemp[1]);
 
-				for (int k = 0; k < gTemp[1]; k++) { // 변번이동할건지
-					for (int i = gTemp[0]; i >= 0; i--) {
-						if (i > 0) {
-							anyArr[i][j] = anyArr[i - 1][j];
-						} else {
-							anyArr[i][j] = 0;
-						}
-					}
+				for (int i = 0; i < anyArr.length; i++) {
+					anyArr[i][j] = gTemp[i];
 				}
-			}
-			
-			printArr(anyArr);
 
-			System.out.println("//// tot count :: "+zCount);
+			}
+
+			// printArr(anyArr);
+			// System.out.println("///////////");
 			// 세로 기준 내려갈 것이 없으면 끝
-			if (zCount == count) {
-				break;				
-			}else {
-				count = zCount;
+			if (count == 3) {
+				break;
+			} else {
+				count++;
 			}
 
 		}
@@ -199,6 +185,8 @@ public class Main_cynap {
 
 		anypung(anyArr);
 		printArr(anyArr);
+
+		sc.close();
 	}
 
 }
