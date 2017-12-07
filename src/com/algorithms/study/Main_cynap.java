@@ -6,6 +6,7 @@ public class Main_cynap {
 
 	// cynap 17하반기 공채 사전코딩문제
 	// http://www.synapsoft.co.kr/jsp/recruit/17.html
+	// 12.2 ~ 12.17
 	// 타일판은 5 × 5
 	// 타일 종류는 1 ~ 4의 네 가지
 	// 가로나 세로로 3개 이상 같은 타일이 연속될 경우 펑! 사라지고, 그 자리에는 위쪽의 타일들이 내려와서 메꿉니다.
@@ -68,15 +69,15 @@ public class Main_cynap {
 		return result;
 	}
 
-	// 0으로 바뀐 자리 하나씩 아래로 땡기기
+	// 세로줄(0의 개수만큼 아래로 떨어진다) 기준으로 0의 시작점, 갯수 구하기
 	static int[] gravity(int[] anyArr) {
 
 		int[] gArr = anyArr;
 		int[] result = new int[2];
- 		int zStart = 0;
+		int zStart = 0;
 		int zCount = 0;
 
-		for (int i = 0; i < gArr.length - 1; i++) {
+		for (int i = 0; i < gArr.length ; i++) {
 
 			if (gArr[i] == 0 && zCount == 0) {
 				zStart = i;
@@ -87,8 +88,15 @@ public class Main_cynap {
 
 		} // 배열에 개수가 몇개인
 
-		return result;
+		if(zCount > 1) {
+			zStart = zStart + zCount -1;
+		}
 		
+		result[0] = zStart; // 시작점
+		result[1] = zCount; // 갯수
+
+		return result;
+
 	}
 
 	static int[][] anypung(int[][] anyArr) {
@@ -105,7 +113,7 @@ public class Main_cynap {
 
 			}
 			rTemp = searchRow(temp);
-			System.out.println("시작점." + rTemp[0] + "같은갯수 " + rTemp[1]);
+			System.out.println("가로 같은 값 // 시작점." + rTemp[0] + " 같은갯수 " + rTemp[1]);
 			if (rTemp[1] > 2) {
 
 				for (int j = rTemp[0]; j < rTemp[0] + rTemp[1]; j++) {
@@ -121,7 +129,7 @@ public class Main_cynap {
 
 			}
 			rTemp = searchCol(temp);
-			System.out.println("시작점 " + rTemp[0] + "같은갯수 " + rTemp[1]);
+			System.out.println("세로 같은 값 // 시작점 " + rTemp[0] + " 같은갯수 " + rTemp[1]);
 
 			if (rTemp[1] > 2) {
 
@@ -132,13 +140,28 @@ public class Main_cynap {
 
 		} // 세로
 
+		printArr(anyArr);
+
 		// 세로 기준으로 0값 채우기
 		int[] gArr = new int[5];
+		int[] gTemp = new int[2];
 		for (int j = 0; j < anyArr.length; j++) {
 			for (int i = 0; i < anyArr.length; i++) {
 				gArr[i] = anyArr[i][j];
 			}
-			gravity(gArr);
+
+			gTemp = gravity(gArr);
+			System.out.println("세로 0값 // 시작점 : " + gTemp[0] + "  //// 0의 갯수 :" + gTemp[1]);
+
+			for (int k = 0; k < gTemp[1]; k++) { // 변번이동할건지
+				for (int i = gTemp[0]; i >= 0; i--) {
+					if (i > 0) {
+						anyArr[i][j] = anyArr[i - 1][j];
+					} else {
+						anyArr[i][j] = 0;
+					}
+				}
+			}
 		}
 
 		return result;
