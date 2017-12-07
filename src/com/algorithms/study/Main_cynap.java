@@ -77,7 +77,7 @@ public class Main_cynap {
 		int zStart = 0;
 		int zCount = 0;
 
-		for (int i = 0; i < gArr.length ; i++) {
+		for (int i = 0; i < gArr.length; i++) {
 
 			if (gArr[i] == 0 && zCount == 0) {
 				zStart = i;
@@ -88,10 +88,10 @@ public class Main_cynap {
 
 		} // 배열에 개수가 몇개인
 
-		if(zCount > 1) {
-			zStart = zStart + zCount -1;
+		if (zCount > 1) {
+			zStart = zStart + zCount - 1;
 		}
-		
+
 		result[0] = zStart; // 시작점
 		result[1] = zCount; // 갯수
 
@@ -106,62 +106,80 @@ public class Main_cynap {
 		int[] temp = new int[5];
 		int[] rTemp = new int[2];
 
-		//System.out.println("row");
-		for (int i = 0; i < anyArr.length; i++) {
-			for (int j = 0; j < anyArr.length; j++) {
-				temp[j] = anyArr[i][j];
+		
+		int count = 0;
+		while (true) {
 
-			}
-			rTemp = searchRow(temp);
-			//System.out.println("가로 같은 값 // 시작점." + rTemp[0] + " 같은갯수 " + rTemp[1]);
-			if (rTemp[1] > 2) {
-
-				for (int j = rTemp[0]; j < rTemp[0] + rTemp[1]; j++) {
-					anyArr[i][j] = 0;
-				}
-			}
-		} // 가로
-
-		//System.out.println("col");
-		for (int j = 0; j < anyArr.length; j++) {
+			// System.out.println("row");
 			for (int i = 0; i < anyArr.length; i++) {
-				temp[i] = anyArr[i][j];
+				for (int j = 0; j < anyArr.length; j++) {
+					temp[j] = anyArr[i][j];
 
-			}
-			rTemp = searchCol(temp);
-			//System.out.println("세로 같은 값 // 시작점 " + rTemp[0] + " 같은갯수 " + rTemp[1]);
-
-			if (rTemp[1] > 2) {
-
-				for (int i = rTemp[0]; i < rTemp[0] + rTemp[1]; i++) {
-					anyArr[i][j] = 0;
 				}
-			}
+				rTemp = searchRow(temp);
+				// System.out.println("가로 같은 값 // 시작점." + rTemp[0] + " 같은갯수 " + rTemp[1]);
+				if (rTemp[1] > 2) {
 
-		} // 세로
-
-		//printArr(anyArr);
-
-		// 세로 기준으로 0값 채우기
-		int[] gArr = new int[5];
-		int[] gTemp = new int[2];
-		for (int j = 0; j < anyArr.length; j++) {
-			for (int i = 0; i < anyArr.length; i++) {
-				gArr[i] = anyArr[i][j];
-			}
-
-			gTemp = gravity(gArr);
-			//System.out.println("세로 0값 // 시작점 : " + gTemp[0] + "  //// 0의 갯수 :" + gTemp[1]);
-
-			for (int k = 0; k < gTemp[1]; k++) { // 변번이동할건지
-				for (int i = gTemp[0]; i >= 0; i--) {
-					if (i > 0) {
-						anyArr[i][j] = anyArr[i - 1][j];
-					} else {
+					for (int j = rTemp[0]; j < rTemp[0] + rTemp[1]; j++) {
 						anyArr[i][j] = 0;
 					}
 				}
+			} // 가로
+
+			// System.out.println("col");
+			for (int j = 0; j < anyArr.length; j++) {
+				for (int i = 0; i < anyArr.length; i++) {
+					temp[i] = anyArr[i][j];
+
+				}
+				rTemp = searchCol(temp);
+				// System.out.println("세로 같은 값 // 시작점 " + rTemp[0] + " 같은갯수 " + rTemp[1]);
+
+				if (rTemp[1] > 2) {
+
+					for (int i = rTemp[0]; i < rTemp[0] + rTemp[1]; i++) {
+						anyArr[i][j] = 0;
+					}
+				}
+
+			} // 세로
+
+			printArr(anyArr);
+
+			// 세로 기준으로 0값 채우기
+			int[] gArr = new int[5];
+			int[] gTemp = new int[2];
+			int zCount = 0;
+			for (int j = 0; j < anyArr.length; j++) {
+				for (int i = 0; i < anyArr.length; i++) {
+					gArr[i] = anyArr[i][j];
+				}
+
+				gTemp = gravity(gArr);
+				zCount += gTemp[1];
+				 System.out.println("세로 0값 // 시작점 : " + gTemp[0] + " //// 0의 갯수 :" + gTemp[1]);
+
+				for (int k = 0; k < gTemp[1]; k++) { // 변번이동할건지
+					for (int i = gTemp[0]; i >= 0; i--) {
+						if (i > 0) {
+							anyArr[i][j] = anyArr[i - 1][j];
+						} else {
+							anyArr[i][j] = 0;
+						}
+					}
+				}
 			}
+			
+			printArr(anyArr);
+
+			System.out.println("//// tot count :: "+zCount);
+			// 세로 기준 내려갈 것이 없으면 끝
+			if (zCount == count) {
+				break;				
+			}else {
+				count = zCount;
+			}
+
 		}
 
 		return result;
