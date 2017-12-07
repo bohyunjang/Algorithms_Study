@@ -106,14 +106,14 @@ public class Main_cynap {
 		int[] temp = new int[5];
 		int[] rTemp = new int[2];
 
-		System.out.println("row");
+		//System.out.println("row");
 		for (int i = 0; i < anyArr.length; i++) {
 			for (int j = 0; j < anyArr.length; j++) {
 				temp[j] = anyArr[i][j];
 
 			}
 			rTemp = searchRow(temp);
-			System.out.println("가로 같은 값 // 시작점." + rTemp[0] + " 같은갯수 " + rTemp[1]);
+			//System.out.println("가로 같은 값 // 시작점." + rTemp[0] + " 같은갯수 " + rTemp[1]);
 			if (rTemp[1] > 2) {
 
 				for (int j = rTemp[0]; j < rTemp[0] + rTemp[1]; j++) {
@@ -122,14 +122,14 @@ public class Main_cynap {
 			}
 		} // 가로
 
-		System.out.println("col");
+		//System.out.println("col");
 		for (int j = 0; j < anyArr.length; j++) {
 			for (int i = 0; i < anyArr.length; i++) {
 				temp[i] = anyArr[i][j];
 
 			}
 			rTemp = searchCol(temp);
-			System.out.println("세로 같은 값 // 시작점 " + rTemp[0] + " 같은갯수 " + rTemp[1]);
+			//System.out.println("세로 같은 값 // 시작점 " + rTemp[0] + " 같은갯수 " + rTemp[1]);
 
 			if (rTemp[1] > 2) {
 
@@ -140,7 +140,7 @@ public class Main_cynap {
 
 		} // 세로
 
-		printArr(anyArr);
+		//printArr(anyArr);
 
 		// 세로 기준으로 0값 채우기
 		int[] gArr = new int[5];
@@ -151,7 +151,7 @@ public class Main_cynap {
 			}
 
 			gTemp = gravity(gArr);
-			System.out.println("세로 0값 // 시작점 : " + gTemp[0] + "  //// 0의 갯수 :" + gTemp[1]);
+			//System.out.println("세로 0값 // 시작점 : " + gTemp[0] + "  //// 0의 갯수 :" + gTemp[1]);
 
 			for (int k = 0; k < gTemp[1]; k++) { // 변번이동할건지
 				for (int i = gTemp[0]; i >= 0; i--) {
